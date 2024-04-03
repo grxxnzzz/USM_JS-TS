@@ -1,13 +1,18 @@
 # 📚 Javascript / Typescript (USM)
 
-Completed tasks for USM studying curve in JS/TS lectures
+📝 Completed tasks in studying curve 🌐 **JS/TS lectures**
 
 | Labs  | Status |
-| ----- | :----: |
+| :---: | :----: |
 | LL_01 |   ✅   |
-| -    |  -   |
-| **Individuals**|  **Status** |
-| LI_01 |   ❎   |
-| -    |  -   |
+|       |        |
 
-# `¯\_(ツ)_/¯`
+| Inds  | Status |
+| :---: | :----: |
+| LI_01 |   ✅   |
+| LI_02 |   ❎   |
+|       |        |
+
+> [!IMPORTANT] Info
+> Student: 👨🏻‍💻 Grigore Zaica  
+> Group: I2302
