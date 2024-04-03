@@ -12,5 +12,5 @@
 
 Например: `const transactionAnalyzer = new TransactionAnalyzer(transactions);`
 
-> [!NOTE]
+> [!NOTE] Примечание
 > заданий [extra] не было сделано

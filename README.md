@@ -12,7 +12,3 @@
 | LI_01 |   ✅   |
 | LI_02 |   ❎   |
 |       |        |
-
-> [!IMPORTANT] Info
-> Student: 👨🏻‍💻 Grigore Zaica  
-> Group: I2302
