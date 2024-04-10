@@ -17,32 +17,56 @@ class TransactionAnalyzer {
     this.transactions = transactions;
   }
 
+  /**
+   * Adds adittional transaction to the given array of transactions (this.transactions)
+   * @param {object} transaction
+   * @returns {object}
+   */
   addTransaction(transaction) {
     return this.transactions.push(transaction);
   }
 
+  /**
+   * Returns object containing all transactions
+   * @returns {object}
+   */
   getAllTransaction() {
     return this.transactions;
   }
 
+  /**
+   * Returns array of Set of unique transaction types
+   * @returns {array}
+   */
   getUniqueTransactionType() {
-    const UniqueTransactionTypes = new Set();
+    const uniqueTransactionTypes = new Set();
     this.transactions.forEach((transaction) =>
-      UniqueTransactionTypes.add(transaction.transaction_type)
+      uniqueTransactionTypes.add(transaction.transaction_type)
     );
-    return Array.from(UniqueTransactionTypes);
+    return Array.from(uniqueTransactionTypes);
   }
 
+  /**
+   * Returns transaction with type given via parameter
+   * @param {string} type
+   * @returns {object}
+   */
   getTransactionByType(type) {
-    const TransactionsByType = [];
+    const transactionsByType = [];
     this.transactions.forEach((transaction) => {
       if (transaction.transaction_type === type) {
-        TransactionsByType.push(transaction);
+        transactionsByType.push(transaction);
       }
     });
-    return TransactionsByType;
+    return transactionsByType;
   }
 
+  /**
+   * Returns transaction in certain date range
+   * @param {any} startDate
+   * @param {any} endDate
+   * @returns {object}
+   */
   getTransactionsInDateRange(startDate, endDate) {
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
@@ -55,26 +79,42 @@ class TransactionAnalyzer {
     return transactionsInRange;
   }
 
+  /**
+   * Returns transaction with merchant given via parameter
+   * @param {string} merchantName
+   * @returns {object}
+   */
   getTransactionsByMerchant(merchantName) {
-    const TransactionsByType = [];
+    const transactionsByType = [];
     this.transactions.forEach((transaction) => {
       if (transaction.merchant_name === merchantName) {
-        TransactionsByType.push(transaction);
+        transactionsByType.push(transaction);
       }
     });
-    return TransactionsByType;
+    return transactionsByType;
   }
 
+  /**
+   * Returns transactions with amount in given range
+   * @param {number} minAmount
+   * @param {number} maxAmount
+   * @returns {array}
+   */
   getTransactionsByAmountRange(minAmount, maxAmount) {
-    const TransactionsByAmountRange = [];
+    const transactionsByAmountRange = [];
     this.transactions.forEach((transaction) => {
       if (transaction.transaction_amount >= minAmount && transaction.transaction_amount <= maxAmount) {
-        TransactionsByAmountRange.push(transaction);
+        transactionsByAmountRange.push(transaction);
       }
     });
-    return TransactionsByAmountRange;
+    return transactionsByAmountRange;
 }
 
+  /**
+   * Returns certain transaction that are in given date range
+   * @param {any} date
+   * @returns {array}
+   */
   getTransactionsBeforeDate(date) {
     const targetDate = new Date(date);
 
@@ -86,26 +126,41 @@ class TransactionAnalyzer {
     return transactionsBeforeDate;
 }
 
+  /**
+   * Calculates total amount of all transactions
+   * @returns {number}
+   */
   calculateTotalAmount() {
-    let TotalAmount = 0;
+    let totalAmount = 0;
     this.transactions.forEach(
-      (transaction) => (TotalAmount += transaction.transaction_amount)
+      (transaction) => (totalAmount += transaction.transaction_amount)
     );
-    return TotalAmount;
+    return totalAmount;
   }
 
+  /**
+   * Calculates total amount of debit transactions
+   * @returns {any}
+   */
   calculateTotalDebitAmount() {
-    let TotalDebitAmount = 0;
+    let totalDebitAmount = 0;
 
     this.transactions.forEach((transaction) => {
       if (transaction.transaction_type === "debit") {
-        TotalDebitAmount += transaction.transaction_amount;
+        totalDebitAmount += transaction.transaction_amount;
       }
     });
 
-    return TotalDebitAmount;
+    return totalDebitAmount;
   }
 
+  /**
+   * Calculates total amount of transaction in given date range. year, month and day aren't necessary. If one's out - calculates using other params.
+   * @param {any} year
+   * @param {any} month
+   * @param {any} day
+   * @returns {array}
+   */
   calculateTotalAmountByDate(year, month, day) {
     const isTransactionOnDate = (transaction, year, month, day) => {
         if (!year && !month && !day) {
@@ -135,6 +190,10 @@ class TransactionAnalyzer {
     return totalAmount;
 }
 
+  /**
+   * Calculates average transaction amount (total amount divided by number of all transactions)
+   * @returns {number}
+   */
   calculateAverageTransactionAmount() {
     let AverageTransactionAmount = 0;
     let TransactionCounter = 0;
@@ -148,6 +207,10 @@ class TransactionAnalyzer {
     return AverageTransactionAmount;
   }
 
+  /**
+   * Returns month that had most of the transactions
+   * @returns {string}
+   */
   findMostTransactionsMonth() {
     const transactionsByMonth = {};
 
@@ -174,6 +237,10 @@ class TransactionAnalyzer {
     return mostTransactionsMonth;
 }
 
+  /**
+   * Returns month that had most of the debit transactions
+   * @returns {string}
+   */
   findMostDebitTransactionMonth() {
     const debitTransactionsByMonth = {};
 
@@ -202,6 +269,11 @@ class TransactionAnalyzer {
     return mostDebitTransactionsMonth;
   }
 
+  /**
+   * Get transaction by its ID
+   * @param {number} id
+   * @returns {object}
+   */
   findTransactionById(id) {
     let TransactionById;
     this.transactions.forEach((transaction) => {
@@ -212,33 +284,41 @@ class TransactionAnalyzer {
     return TransactionById;
   }
 
+  /**
+   * Returns most used type of transactions
+   * @returns {any}
+   */
   mostTransactionTypes() {
     let mostTransactionType = "";
-    let DebitTransactionsNumber = 0;
-    let CreditTransactionsNumber = 0;
+    let debitTransactionsNumber = 0;
+    let creditTransactionsNumber = 0;
 
     this.transactions.forEach((transaction) => {
       if (transaction.transaction_type === "debit") {
-        DebitTransactionsNumber++;
-      } else CreditTransactionsNumber++;
+        debitTransactionsNumber++;
+      } else creditTransactionsNumber++;
     });
-    if (DebitTransactionsNumber > CreditTransactionsNumber) {
+    if (debitTransactionsNumber > creditTransactionsNumber) {
       mostTransactionType = "debit";
-    } else if (DebitTransactionsNumber < CreditTransactionsNumber) {
+    } else if (debitTransactionsNumber < creditTransactionsNumber) {
       mostTransactionType = "credit";
     } else mostTransactionType = "equal";
 
     return mostTransactionType;
   }
 
+  /**
+   * Returns array with only transactions.descriptions
+   * @returns {any}
+   */
   mapTransactionDescriptions() {
-    let TransactionDescriptions = [];
+    let transactionDescriptions = [];
 
     this.transactions.forEach((transaction) => {
-      TransactionDescriptions.push(transaction.transaction_description);
+      transactionDescriptions.push(transaction.transaction_description);
     });
 
-    return TransactionDescriptions;
+    return transactionDescriptions;
   }
 }
 
