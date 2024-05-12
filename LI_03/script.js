@@ -1,8 +1,8 @@
 // script.js
 let transactions = [];
 
-document.getElementById('transaction-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById('transaction-form').addEventListener('submit', function (f) {
+    f.preventDefault();
     addTransaction();
     calculateTotal();
     document.getElementById('amount').value = '';
@@ -10,12 +10,12 @@ document.getElementById('transaction-form').addEventListener('submit', function 
     document.getElementById('description').value = '';
 });
 
-document.getElementById('transaction-table').addEventListener('click', function (e) {
-    if (e.target.className === 'delete-btn') {
+document.getElementById('transaction-table').addEventListener('click', function (f) {
+    if (f.target.className === 'delete-btn') {
         deleteTransaction(e.target.parentElement.parentElement.id);
         calculateTotal();
-    } else if (e.target.tagName === 'TD') {
-        showFullDescription(e.target.parentElement.id);
+    } else if (f.target.tagName === 'TD') {
+        showFullDescription(f.target.parentElement.id);
     }
 });
 
