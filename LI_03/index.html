@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transaction Tracker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <span class="flex-container">
+        <span class="container">
+            <form id="transaction-form">
+                <input type="number" id="amount" placeholder="Сумма">
+                <input type="text" id="category" placeholder="Категория">
+                <input type="text" id="description" placeholder="Описание">
+                <button type="submit">Добавить</button>
+            </form>
+        </span>
+        
+        <span class="container">
+            <table id="transaction-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Дата</th>
+                    <th>Категория</th>
+                    <th>Описание</th>
+                    <th>Действие</th>
+                </tr>
+            </table>
+        </span>
+    
+        <span class="container">
+            <div id="total">Всего: 0</div>
+            <div id="total-description">
+                <i>Выберите транзакцию, чтобы увидеть полное описание</i>
+            </div>
+        </span>
+    </span>
+    <script src="script.js"></script>
+</body>
+
+</html>
